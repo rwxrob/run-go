@@ -16,12 +16,24 @@ type Args map[string]string
 
 // List returns the expanded keys and values as a list of valid
 // arguments with the keys converted into double-dash (long-form)
-// arguments.
+// arguments (ex: --foo bar)
 func (a Args) List() []string {
 	list := []string{}
 	for k, v := range a {
 		k = `--` + k
 		list = append(list, k, v)
+	}
+	return list
+}
+
+// ListEq returns the expanded keys and values as a list of valid
+// arguments with the keys converted into double-dash (long-form)
+// arguments that are joined to their value with an equal sign (ex:
+// --foo=bar).
+func (a Args) ListEq() []string {
+	list := []string{}
+	for k, v := range a {
+		list = append(list, `--`+k+`=`+v)
 	}
 	return list
 }

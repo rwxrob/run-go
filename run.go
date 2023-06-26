@@ -7,6 +7,13 @@ import (
 	"os/exec"
 )
 
+// Args encapsulates the possible long-form options that can be passed
+// to anything on the command line. Empty strings are valid values. To
+// omit an argument ensure that it no longer exists in the map
+// [delete(map,key)]. For more complex handling of options consider
+// using a command-line arguments handling package.
+type Args map[string]string
+
 // Cmds is list of string lists to be used with the *All functions where
 // each string list contains a list of arguments to be passed to Exec
 // (or equivalent).

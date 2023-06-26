@@ -14,6 +14,18 @@ import (
 // using a command-line arguments handling package.
 type Args map[string]string
 
+// List returns the expanded keys and values as a list of valid
+// arguments with the keys converted into double-dash (long-form)
+// arguments.
+func (a Args) List() []string {
+	list := []string{}
+	for k, v := range a {
+		k = `--` + k
+		list = append(list, k, v)
+	}
+	return list
+}
+
 // Cmds is list of string lists to be used with the *All functions where
 // each string list contains a list of arguments to be passed to Exec
 // (or equivalent).
